@@ -1,0 +1,55 @@
+***Desarrollo de Interfaces*** 1ªHORA:
+Estructura básica.
+
+Widgets con mayúscula y las propiedades con minuscula.
+
+import 'package:flutter/material.dart';
+
+ void main() {
+    runApp(             -> Funcion de Flutter que recibe un widget y lo coloca como punto de partida de la interfaz.
+        MaterialApp(            -> |
+            home: Scaffold(     -> | WIdget que configura la aplicación en MAterial Design de Google.
+                appBar: AppBar  -> Como un encabezado               
+                body: Center(   -> El cuerpo principal de la app
+                )  
+            )
+        )
+    )
+}
+┌──────────────────────────────┐
+│            AppBar            │
+├──────────────────────────────┤
+│                              │
+│                              │
+│             body             │    
+│                              │ 
+│                         [ + ]│
+└──────────────────────────────┘
+
+Los que tienen CHidren:
+- Row -> (Text, Icon, Text, etc...)
+- Column -> (Text, Icon, Text, etc...)
+- Stack
+- Warp -> Chip(label: Text(""), etc...),
+
+Lo que tienen child:
+- ElevatedButton -> child: Text o child: Icon, etc...
+- Padding
+- CircleAvatar -> child: Icon
+- Card -> child: Row o child: Column, etc...
+- Center
+- SizedBox
+- Expanded
+- Positioned
+
+***Despliegue de aplicaciones web*** 2ª y 3ª HORA:
+
+cp -r .git git
+
+***Gestion empresarial***
+
+Sistema de gestion empresarial, software que se gestionan dentro de una empresa.
+
+***ITK***
+Grupos de 2.
+Tarea - tormenta de ideas con cosas que ya existen y cosas que se pueden mejorar. Por ejemplo, coasa que se echan de menos en el entorno de nuestro alrededor, relacionado con el ciclo. 
