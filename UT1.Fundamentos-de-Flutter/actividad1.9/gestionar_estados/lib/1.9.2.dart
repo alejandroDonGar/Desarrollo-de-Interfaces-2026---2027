@@ -24,3 +24,8 @@ class MiApp extends StatelessWidget {
     );
   }
 }
+
+//!Tu tarea:
+//*    Crea PiePagina como StatelessWidget.
+//*    Mueve a él los dos textos del pie.
+//*    Utiliza PiePagina() en la interfaz.

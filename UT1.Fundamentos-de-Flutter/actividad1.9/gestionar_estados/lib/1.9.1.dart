@@ -17,6 +17,9 @@ class MiApp extends StatelessWidget {
       ),
     );
   }
-
-
 }
+
+//! Tu tarea:
+//*    Crea un StatelessWidget llamado MiApp. ->  DONE
+//*    Mueve la interfaz a ese widget.        ->  DONE
+//*    Haz que main() ejecute MiApp.          ->  DONE
