@@ -101,7 +101,7 @@ class CentroControl extends StatelessWidget {
                     icon: const Icon(Icons.arrow_forward),
                     label: const Text('INICIAR MISIÓN'),
                     onPressed: () {
-                  // TODO 1: Abrir la pantalla Identificacion.
+                      // TODO 1: Abrir la pantalla Identificacion.
                     },
                   ),
                   const SizedBox(height: 18),
@@ -200,7 +200,7 @@ class Identificacion extends StatelessWidget {
                     icon: const Icon(Icons.arrow_forward),
                     label: const Text('CONTINUAR · COMBUSTIBLE'),
                     onPressed: () {
-                  // TODO 2: Abrir la pantalla Combustible.
+                      // TODO 2: Abrir la pantalla Combustible.
                     },
                   ),
                   const SizedBox(height: 18),
@@ -299,7 +299,7 @@ class Combustible extends StatelessWidget {
                     icon: const Icon(Icons.arrow_forward),
                     label: const Text('CONTINUAR · OXÍGENO'),
                     onPressed: () {
-                  // TODO 3: Abrir la pantalla Oxigeno.
+                      // TODO 3: Abrir la pantalla Oxigeno.
                     },
                   ),
                   const SizedBox(height: 18),
@@ -398,7 +398,7 @@ class Oxigeno extends StatelessWidget {
                     icon: const Icon(Icons.arrow_forward),
                     label: const Text('CONTINUAR · MOTORES'),
                     onPressed: () {
-                  // TODO 4: Abrir la pantalla Motores.
+                      // TODO 4: Abrir la pantalla Motores.
                     },
                   ),
                   const SizedBox(height: 18),
@@ -497,7 +497,7 @@ class Motores extends StatelessWidget {
                     icon: const Icon(Icons.arrow_forward),
                     label: const Text('INICIAR DESPEGUE'),
                     onPressed: () {
-                  // TODO 5: Abrir la pantalla Despegue.
+                      // TODO 5: Abrir la pantalla Despegue.
                     },
                   ),
                   const SizedBox(height: 18),
@@ -596,7 +596,7 @@ class Despegue extends StatelessWidget {
                     icon: const Icon(Icons.arrow_forward),
                     label: const Text('INICIAR NUEVA MISIÓN'),
                     onPressed: () {
-                  // TODO 6: Volver directamente al Centro de control.
+                      Navigator.pop(context);
                     },
                   ),
                   const SizedBox(height: 18),

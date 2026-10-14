@@ -160,7 +160,7 @@ class PantallaInterstellar extends StatelessWidget {
               icon: const Icon(Icons.arrow_back),
               label: const Text('Volver al catálogo'),
               onPressed: () {
-                // TODO 4: Regresar al catálogo.
+                Navigator.pop(context);
               },
             ),
           ],
@@ -226,7 +226,7 @@ class PantallaJurassicPark extends StatelessWidget {
               icon: const Icon(Icons.arrow_back),
               label: const Text('Volver al catálogo'),
               onPressed: () {
-                // TODO 5: Regresar al catálogo.
+                Navigator.pop(context);
               },
             ),
           ],
@@ -292,7 +292,7 @@ class PantallaCoco extends StatelessWidget {
               icon: const Icon(Icons.arrow_back),
               label: const Text('Volver al catálogo'),
               onPressed: () {
-                // TODO 6: Regresar al catálogo.
+                Navigator.pop(context);
               },
             ),
           ],
