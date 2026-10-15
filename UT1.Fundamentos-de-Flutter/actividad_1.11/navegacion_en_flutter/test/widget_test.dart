@@ -8,7 +8,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:navegacion_en_flutter/catalogo_pelis.dart';
+import 'package:navegacion_en_flutter/1.11.1.dart';
 
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
