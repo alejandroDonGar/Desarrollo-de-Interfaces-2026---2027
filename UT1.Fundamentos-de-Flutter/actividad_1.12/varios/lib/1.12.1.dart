@@ -63,6 +63,9 @@ class JornadaTecnologica extends StatelessWidget {
               ],
             ),
             SizedBox(
+              height: 16
+            ),
+            SizedBox(
               width: 240,
               height: 80,
               child: Card( 
@@ -71,7 +74,12 @@ class JornadaTecnologica extends StatelessWidget {
                 ),
               ),
             ),
+            SizedBox(
+              height: 16
+            ),
             Wrap(
+              spacing: 8,
+              runSpacing: 8,
               children: [
                 Chip(label: Text("Programación")),
                 Chip(label: Text("Robótica")),
@@ -81,10 +89,35 @@ class JornadaTecnologica extends StatelessWidget {
                 Chip(label: Text("Redes")),
               ],
             ),
-          ] 
+            SizedBox(
+              height: 16
+            ),
+            Container(
+              padding: EdgeInsets.all(16),
+              margin: EdgeInsets.only(top: 8, bottom: 8),
+              color: Colors.grey.shade200,
+              child: Text("Inscrpcion graturita hasta completar el aforo"),
+            ),
+            SizedBox(
+              height: 16
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                ElevatedButton(
+                  onPressed: () {}, 
+                  child: Text("Consultar programa")
+                ),
+                SizedBox(height: 8),
+                ElevatedButton(
+                  onPressed: () {}, 
+                  child: Text("Inscribirse")
+                ),
+              ],
+            ),
+          ]
         ),
       )
-      
     );
   }
 }
