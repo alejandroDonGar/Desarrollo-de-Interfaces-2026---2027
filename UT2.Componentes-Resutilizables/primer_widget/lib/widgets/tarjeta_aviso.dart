@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import primer_widget/lib/widgets/tarjeta_aviso;
+
 class TarjetaAviso extends StatelessWidget { // Paso 1
 
   final String mensaje; // Paso 2
