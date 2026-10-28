@@ -55,15 +55,25 @@ class CabeceraJuego extends StatelessWidget {
   }
 }
 
-class PanelMascota extends StatelessWidget {
+class PanelMascota extends StatefulWidget {
   const PanelMascota({super.key});
-  
+
+  @override
+  State<PanelMascota> createState() {
+    return _PanelMascotaState();
+  }
+}
+
+class _PanelMascotaState extends State<PanelMascota> {  
+  int comida = 5;
+
   @override
   Widget build(BuildContext context) {
+    
     return Column(
       children: [
         Icon(caraMascota(5, 5, false), size: 120, color: Colors.teal),
-        const Text('Comida: 5', style: TextStyle(fontSize: 20)),
+        Text('Comida: $comida', style: TextStyle(fontSize: 20)),
         const Text('Diversión: 5', style: TextStyle(fontSize: 20)),
         const SizedBox(height: 16),
         Row(
@@ -71,14 +81,17 @@ class PanelMascota extends StatelessWidget {
           children: [
             ElevatedButton(
               onPressed: () {
-                
+                setState(() {
+                  if(comida<10) {
+                    comida++;
+                  }
+                });
               },
               child: const Text('Comer'),
             ),
             const SizedBox(width: 12),
             ElevatedButton(
               onPressed: () {
-                print('Jugar');
               },
               child: const Text('Jugar'),
             ),
