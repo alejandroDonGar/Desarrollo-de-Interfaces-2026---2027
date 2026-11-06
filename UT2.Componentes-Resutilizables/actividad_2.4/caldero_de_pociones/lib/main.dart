@@ -4,27 +4,42 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 // ===== El notificador de cambios: las reglas del juego =====
-// TODO 1: haz que Caldero sea un notificador de cambios.
-class Caldero {
+
+//? Paso 1: haz que Caldero sea un notificador de cambios.
+//* Pendiente de revisar
+
+class Caldero extends ChangeNotifier {
   int potencia = 0;
   int puntos = 0;
   bool explotado = false;
 
   void echarIngrediente() {
-    // TODO 2: si ha explotado, no hagas nada.
-    //         Si no, suma a la potencia un número al azar entre 1 y 3:
-    //         Random().nextInt(3) + 1
-    //         Si la potencia pasa de 10, el caldero explota.
-    //         Al terminar, avisa.
+    //? Paso 2: si ha explotado, no hagas nada.
+    //* Pendiente de revisar
+
+    potencia += Random().nextInt(3) + 1;
+    if(potencia > 10) explotado = true;
+    notifyListeners();
   }
 
   void embotellar() {
-    // TODO 3: si ha explotado, no hagas nada.
-    //         Si no, suma la potencia a los puntos, vacía el caldero y avisa.
+    //? Paso 3: si ha explotado, no hagas nada.
+    //* Pendiente de revisar
+
+    if(explotado == false) {
+      puntos = potencia;
+      potencia = 0;
+    } 
+    notifyListeners();
   }
 
   void limpiar() {
-    // TODO 4: deja la potencia a 0, quita la explosión y avisa.
+    //? Paso 4: deja la potencia a 0, quita la explosión y avisa.
+    //* Pendiente de revisar
+
+    potencia = 0;
+    explotado = false;
+    notifyListeners();
     //         (Los puntos no se tocan).
   }
 }
@@ -95,7 +110,6 @@ class VistaCaldero extends StatelessWidget {
     // TODO 7: escucha el caldero y lee de él estos dos datos.
     const potencia = 0;
     const explotado = false;
-
     final color = explotado
         ? Colors.red
         : potencia <= 5
