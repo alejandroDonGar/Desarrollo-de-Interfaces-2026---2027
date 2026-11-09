@@ -1,232 +1,152 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-// ===== El notificador de cambios: ya está hecho, no hace falta tocarlo =====
-class CopaCasas extends ChangeNotifier {
-  final Map<String, int> puntos = {
+void main() {
+  runApp(
+    ChangeNotifierProvider(
+      create: (_) => SombreroProvider(),
+      child: const SombreroApp(),
+    ),
+  );
+}
+
+class SombreroProvider extends ChangeNotifier {
+  String _ultimaCasa = '¿?';
+
+  final Map _recuento = {
     'Gryffindor': 0,
     'Hufflepuff': 0,
     'Ravenclaw': 0,
     'Slytherin': 0,
   };
 
-  void sumar(String casa) {
-    puntos[casa] = puntos[casa]! + 10;
+  String get ultimaCasa => _ultimaCasa;
+  Map get recuento => _recuento;
+
+  void seleccionar() {
+    final casas = _recuento.keys.toList();
+    final elegida = casas[Random().nextInt(4)];
+
+    _ultimaCasa = elegida;
+    _recuento[elegida] = _recuento[elegida]! + 1;
     notifyListeners();
   }
 
-  void restar(String casa) {
-    if (puntos[casa]! < 10) return; // los puntos no bajan de 0
-    puntos[casa] = puntos[casa]! - 10;
+  void reiniciar() {
+    _ultimaCasa = '¿?';
+    for (final casa in _recuento.keys) {
+      _recuento[casa] = 0;
+    }
     notifyListeners();
   }
-
-  String lider() {
-    var mejor = 'Nadie';
-    var maximo = 0;
-    puntos.forEach((casa, valor) {
-      if (valor > maximo) {
-        mejor = casa;
-        maximo = valor;
-      }
-    });
-    return mejor;
-  }
 }
 
-void main() {
-  runApp(const CopaApp());
-}
-
-class CopaApp extends StatelessWidget {
-  const CopaApp({super.key});
+class SombreroApp extends StatelessWidget {
+  const SombreroApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(colorSchemeSeed: Colors.indigo, useMaterial3: true),
+      theme: ThemeData(colorSchemeSeed: Colors.brown, useMaterial3: true),
       home: Scaffold(
-        appBar: AppBar(
-          title: const Text('🏆 Copa de las Casas'),
-          actions: const [MarcadorLider(), SizedBox(width: 16)],
-        ),
-        body: GridView.count(
-          crossAxisCount: 2,
-          padding: const EdgeInsets.all(16),
-          mainAxisSpacing: 12,
-          crossAxisSpacing: 12,
-          children: const [
-            TarjetaCasa(casa: 'Gryffindor', color: Color(0xFF7F0909)),
-            TarjetaCasa(casa: 'Hufflepuff', color: Color(0xFFEEB939)),
-            TarjetaCasa(casa: 'Ravenclaw', color: Color(0xFF0E1A40)),
-            TarjetaCasa(casa: 'Slytherin', color: Color(0xFF1A472A)),
-          ],
+        appBar: AppBar(title: const Text('🎩 El sombrero seleccionador')),
+        body: const Padding(
+          padding: EdgeInsets.all(20),
+          child: Column(
+            children: [
+              ResultadoSombrero(),
+              SizedBox(height: 20),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  BotonSeleccionar(),
+                  SizedBox(width: 12),
+                  BotonReiniciar(),
+                ],
+              ),
+              SizedBox(height: 20),
+              RecuentoCasas(),
+            ],
+          ),
         ),
       ),
     );
   }
 }
 
-class MarcadorLider extends StatelessWidget {
-  const MarcadorLider({super.key});
+class ResultadoSombrero extends StatelessWidget {
+  const ResultadoSombrero({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const Chip(label: Text('Va ganando: Nadie'));
+    final casa = context.watch().ultimaCasa;
+
+    return Column(
+      children: [
+        const Text('🎩', style: TextStyle(fontSize: 72)),
+        Text(
+          casa,
+          style: const TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
+        ),
+      ],
+    );
   }
 }
 
-class TarjetaCasa extends StatelessWidget {
-  final String casa;
-  final Color color;
-
-  const TarjetaCasa({super.key, required this.casa, required this.color});
+class RecuentoCasas extends StatelessWidget {
+  const RecuentoCasas({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final recuento = context.watch().recuento;
+
     return Card(
-      color: color,
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(casa, style: const TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold)),
-          const SizedBox(height: 8),
-          Text('0', style: const TextStyle(color: Colors.white, fontSize: 36)),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              IconButton.filledTonal(
-                onPressed: () {},
-                icon: const Icon(Icons.remove),
+          for (final entrada in recuento.entries)
+            ListTile(
+              leading: const Icon(Icons.shield),
+              title: Text(entrada.key),
+              trailing: Text(
+                '${entrada.value}',
+                style: const TextStyle(fontSize: 20),
               ),
-              const SizedBox(width: 12),
-              IconButton.filledTonal(
-                onPressed: () {},
-                icon: const Icon(Icons.add),
-              ),
-            ],
-          ),
+            ),
         ],
       ),
     );
   }
 }
 
-//* Codigo original
-/*
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-
-// ===== El notificador de cambios: ya está hecho, no hace falta tocarlo =====
-class CopaCasas extends ChangeNotifier {
-  final Map<String, int> puntos = {
-    'Gryffindor': 0,
-    'Hufflepuff': 0,
-    'Ravenclaw': 0,
-    'Slytherin': 0,
-  };
-
-  void sumar(String casa) {
-    puntos[casa] = puntos[casa]! + 10;
-    notifyListeners();
-  }
-
-  void restar(String casa) {
-    if (puntos[casa]! < 10) return; // los puntos no bajan de 0
-    puntos[casa] = puntos[casa]! - 10;
-    notifyListeners();
-  }
-
-  String lider() {
-    var mejor = 'Nadie';
-    var maximo = 0;
-    puntos.forEach((casa, valor) {
-      if (valor > maximo) {
-        mejor = casa;
-        maximo = valor;
-      }
-    });
-    return mejor;
-  }
-}
-
-void main() {
-  runApp(const CopaApp());
-}
-
-class CopaApp extends StatelessWidget {
-  const CopaApp({super.key});
+class BotonSeleccionar extends StatelessWidget {
+  const BotonSeleccionar({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(colorSchemeSeed: Colors.indigo, useMaterial3: true),
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('🏆 Copa de las Casas'),
-          actions: const [MarcadorLider(), SizedBox(width: 16)],
-        ),
-        body: GridView.count(
-          crossAxisCount: 2,
-          padding: const EdgeInsets.all(16),
-          mainAxisSpacing: 12,
-          crossAxisSpacing: 12,
-          children: const [
-            TarjetaCasa(casa: 'Gryffindor', color: Color(0xFF7F0909)),
-            TarjetaCasa(casa: 'Hufflepuff', color: Color(0xFFEEB939)),
-            TarjetaCasa(casa: 'Ravenclaw', color: Color(0xFF0E1A40)),
-            TarjetaCasa(casa: 'Slytherin', color: Color(0xFF1A472A)),
-          ],
-        ),
-      ),
+    return FilledButton.icon(
+      onPressed: () {
+        context.read().seleccionar();
+      },
+      icon: const Icon(Icons.auto_awesome),
+      label: const Text('Seleccionar'),
     );
   }
 }
 
-class MarcadorLider extends StatelessWidget {
-  const MarcadorLider({super.key});
+class BotonReiniciar extends StatelessWidget {
+  const BotonReiniciar({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const Chip(label: Text('Va ganando: Nadie'));
-  }
-}
-
-class TarjetaCasa extends StatelessWidget {
-  final String casa;
-  final Color color;
-
-  const TarjetaCasa({super.key, required this.casa, required this.color});
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      color: color,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(casa, style: const TextStyle(color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold)),
-          const SizedBox(height: 8),
-          Text('0', style: const TextStyle(color: Colors.white, fontSize: 36)),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              IconButton.filledTonal(
-                onPressed: () {},
-                icon: const Icon(Icons.remove),
-              ),
-              const SizedBox(width: 12),
-              IconButton.filledTonal(
-                onPressed: () {},
-                icon: const Icon(Icons.add),
-              ),
-            ],
-          ),
-        ],
-      ),
+    return OutlinedButton.icon(
+      onPressed: () {
+        context.read().reiniciar();
+      },
+      icon: const Icon(Icons.refresh),
+      label: const Text('Reiniciar'),
     );
   }
 }
-*/
