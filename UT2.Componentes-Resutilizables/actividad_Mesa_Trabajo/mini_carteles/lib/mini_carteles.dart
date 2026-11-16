@@ -1,0 +1,1 @@
+export 'src/cartel_recogida.dart';
