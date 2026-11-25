@@ -78,3 +78,73 @@ class PantallaLogros extends StatelessWidget {
     );
   }
 }
+
+//* Código origina:
+/*
+import 'package:flutter/material.dart';
+
+void main() => runApp(const GremioApp());
+
+class GremioApp extends StatelessWidget {
+  const GremioApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const MaterialApp(home: PantallaLogros());
+  }
+}
+
+class PantallaLogros extends StatelessWidget {
+  const PantallaLogros({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('Logros del gremio')),
+      body: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Wrap(
+          spacing: 24,
+          runSpacing: 16,
+          children: [
+            const Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                CircleAvatar(radius: 32, backgroundColor: Colors.amber, child: Icon(Icons.whatshot)),
+                SizedBox(height: 4),
+                Text('Primer dragón'),
+              ],
+            ),
+            const Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                CircleAvatar(radius: 32, backgroundColor: Colors.teal, child: Icon(Icons.explore)),
+                SizedBox(height: 4),
+                Text('Explorador'),
+              ],
+            ),
+            Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    CircleAvatar(
+                      radius: 32,
+                      backgroundColor: Colors.grey.shade300,
+                      child: const Icon(Icons.star),
+                    ),
+                    const Icon(Icons.lock, size: 36),
+                  ],
+                ),
+                const SizedBox(height: 4),
+                const Text('Leyenda'),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+*/
